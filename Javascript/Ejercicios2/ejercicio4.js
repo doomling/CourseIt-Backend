@@ -1,0 +1,1 @@
+//Crear una clase contador que tenga la funcionalidad para sumar numeros, restar numeros, resetear el contador y acceder al valor actual del contador.
