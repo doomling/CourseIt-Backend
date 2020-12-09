@@ -5,6 +5,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const githubRouter = require('./routes/github');
+const pokemonRouter = require('./routes/pokemon');
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/github', githubRouter);
+app.use('/pokemon', pokemonRouter);
 
 module.exports = app;

@@ -31,12 +31,6 @@ class githubControllers {
     const newDetails = {...details, age: 26, favoritIcecream: 'No me gusta el helado'}
     res.send(newDetails);
   }
-
-  //Utilizando la misma lógica del ejercicio 0 devolver una lista de los primeros 150 números primos
-  //Utilizando la poke api https://pokeapi.co/ devolver a que Pokemon representa ese número en el siguiente formato
-  getPrimos(req, res){
-    
-  }
 }
 
 module.exports = githubControllers;

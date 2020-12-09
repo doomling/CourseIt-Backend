@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const githubController = require('./../controllers/githubControllers');
+const githubController = require('./../controllers/githubController');
 
 const GithubController = new githubController;
 
@@ -16,8 +16,5 @@ router.get('/usergithub/:user/newdetails', function (req, res, next) {
   GithubController.newGetDetails(req, res);
 });
 
-router.get('/primos', function (req, res, next) {
-  GithubController.getPrimos(req,res);
-})
 
 module.exports = router;
