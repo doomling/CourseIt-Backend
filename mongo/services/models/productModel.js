@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 //Queremos crear una API para el manejo de productos: nombre, precio, descripcion, categoria, cantidad en stock y entrega gratis
-const serviceSchema = mongoose.Schema(
+//Agregar discount
+const productSchema = mongoose.Schema(
   {
     name: {
       type: String,
@@ -26,8 +27,12 @@ const serviceSchema = mongoose.Schema(
     freeshipping: {
       type: Boolean,
       required: true
+    },
+    discount: {
+      type: Number,
+      required: true
     }
   }
 );
 
-module.exports = mongoose.model('Service', serviceSchema);
+module.exports = mongoose.model('Product', productSchema);

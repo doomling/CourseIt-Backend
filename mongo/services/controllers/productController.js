@@ -3,6 +3,7 @@ class ProductController{
     this.productService = productService;
   };
 
+  //get de productos
   async getProduct(req, res){
     const product = await this.productService.getProduct();
     try{
@@ -13,6 +14,7 @@ class ProductController{
     }
   };
 
+  //post de productos
   async postProduct(req, res){
     const { name, price, description, category, stock, freeshipping } = req.body;
     const product = {
@@ -37,6 +39,7 @@ class ProductController{
     }
   };
 
+  //modificación de producto según el id
   async putProduct(req, res){
     const { name, price, description, category, stock, freeshipping } = req.body;
     const { id } = req.params;
@@ -62,6 +65,7 @@ class ProductController{
     }
   };
 
+  //filtrar producto si tiene envío gratis
   async getProductFilter(req, res){
     const product = await this.productService.filterProduct();
     try{
@@ -69,6 +73,30 @@ class ProductController{
     }catch(e){
       console.log(e);
       res.status(500).send('Error en recibir')
+    }
+  };
+
+  async putAddProperty(req, res){
+    const { name, price, description, category, stock, freeshipping, discount } = req.body;
+    const product = {
+      name: name,
+      price: price,
+      description: description,
+      category: category,
+      stock: stock,
+      freeshipping: freeshipping,
+      discount: 0
+    };
+
+    if(product && !discount){
+      try{
+        await this.productService.addProperty(product);
+        res.status(200).send('Se agregó discount con éxito');
+      }catch(e){
+        res.status(500).send('Error al agregar');
+      }
+    }else{
+      res.status(400).send('Falta información');
     }
   }
 }
