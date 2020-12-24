@@ -88,6 +88,7 @@ class ProductController{
     }
   };
 
+  //agregar la propiedas discount: 0 a los que no tienen
   async putAddProperty(req, res){
     const { name, price, description, category, stock, freeshipping, discount } = req.body;
     const product = {

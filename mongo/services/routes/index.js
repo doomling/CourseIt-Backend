@@ -10,6 +10,7 @@ const UserInstance = new UserController(new UserService());
 
 //Queremos crear una API para el manejo de productos: [GET] /products - [GET] /products/:id - [POST] /products - [PUT] /products/:id
 //Queremos crear un nuevo modelo de datos (en el mismo proyecto) pero para usuarios: [GET] /users - [GET] /users/:id - [GET] /users/:handler - [POST] /users
+//Queremos crear un nuevo modelo de datos (en el mismo proyecto) para manejar las ventas de productos: [GET] /sales - [GET] /sales/:id - [GET] /sales/:user - [POST] /sales
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -36,6 +37,7 @@ router.get('/products/:id', function(req, res, next){
   ProductInstance.getProductId(req, res);
 });
 
+//put /products/discount
 router.put('/products/discount', function(req, res, next){
   ProductInstance.putAddProperty(req, res);
 });
@@ -45,21 +47,44 @@ router.put('/products/:id', function(req, res, next){
   ProductInstance.putProduct(req, res);
 });
 
+//get /users
 router.get('/users', function(req, res, next) {
   UserInstance.getUser(req, res);
 });
 
-router.post('/users', function(req, res, next) {
-  UserInstance.postUser(req, res);
-});
-
+//get /users/:id
 router.get('/users/:id', function(req, res, next) {
   UserInstance.getUserId(req, res);
 });
 
-router.get('/users/:handler', function(req, res, next) {
+//get /users/:handler
+router.get('/users/handler/:handler', function(req, res, next) {
   UserInstance.getUserHandler(req, res);
-})
+});
 
+//post /users
+router.post('/users', function(req, res, next) {
+  UserInstance.postUser(req, res);
+});
+
+//get /sales
+router.get('/sales', function(req, res, next) {
+
+});
+
+//get /sales/:id
+router.get('/sales/:id', function(req, res, next) {
+
+});
+
+//get /sales/:user
+router.get('/sales/user/:user', function(req, res, next) {
+
+});
+
+//post sales
+router.get('/sales', function(req, res, next) {
+
+});
 
 module.exports = router;

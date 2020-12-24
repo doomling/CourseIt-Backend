@@ -14,11 +14,13 @@ class UserService{
     return newUser.save();
   };
 
+  //get de los users según el id
   getUserId(id){
     const query = User.findOne({_id: id}).exec();
     return query;
   };
 
+  //get de los users según el handler
   getUserHandler(handler){
     const query = User.findOne({user: handler}).exec();
     return query;

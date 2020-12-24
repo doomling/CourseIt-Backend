@@ -14,6 +14,7 @@ class UserController{
     }
   };
 
+  //post de users
   async postUser(req, res){
     const { name, user, password, age } = req.body;
     const userData = {
@@ -36,6 +37,7 @@ class UserController{
     }
   };
 
+  //get de users por id
   async getUserId(req, res){
     const { id } = req.params;
     const user = await this.userService.getUserId(id);
@@ -47,8 +49,9 @@ class UserController{
     }
   };
 
+  //get de users por handler
   async getUserHandler(req, res){
-    const { handle } = req.params;
+    const { handler } = req.params;
     const user = await this.userService.getUserHandler(handler);
     try{
       res.status(200).json(user);
