@@ -5,13 +5,13 @@ class UserController{
 
   //get de users
   async getUser(req, res){
-    const user = await this.userService.getUser();
     try{
+      const user = await this.userService.getUser();
       res.status(200).json(user);
     }catch(e){
       console.log(e);
       res.status(500).send('Error en recibir');
-    }
+    };
   };
 
   //post de users
@@ -31,34 +31,36 @@ class UserController{
       }catch(e){
         console.log(e);
         res.status(500).send('Error en la creación');
-      }
+      };
     }else{
       res.status(400).send('Falta información');
-    }
+    };
   };
 
   //get de users por id
   async getUserId(req, res){
     const { id } = req.params;
-    const user = await this.userService.getUserId(id);
+    
     try{
+      const user = await this.userService.getUserId(id);
       res.status(200).json(user);
     }catch(e){
       console.log(e);
       res.status(500).send('Error en recibir');
-    }
+    };
   };
 
   //get de users por handler
   async getUserHandler(req, res){
     const { handler } = req.params;
-    const user = await this.userService.getUserHandler(handler);
+    
     try{
+      const user = await this.userService.getUserHandler(handler);
       res.status(200).json(user);
     }catch(e){
       console.log(e);
       res.status(500).send('Error en recibir');
-    }
+    };
   };
 }
 

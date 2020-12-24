@@ -4,14 +4,31 @@ class ProductController{
   };
 
   //get de productos
+  //Nuestra cantidad de productos esta escalando mucho por lo que queremos establecer paginas de a 3 productos. Para eso vamos a modificar nuestro endpoint [GET] /products para que este limitado a los primeros tres productos.
+  //Para pasar de pagina vamos a usar el query param "page"
   async getProduct(req, res){
-    const product = await this.productService.getProduct();
-    try{
-      res.status(200).json(product);
-    }catch(e){
-      console.log(e);
-      res.status(500).send('Error en recibir')
-    }
+    const { page } = req.query;
+    let offset = 0;
+    let limit = 3;
+
+    if(page){
+      try{
+        offset = 3 * (page - 1);
+        const product = await this.productService.getProduct(offset, limit);
+        res.status(200).json(product);
+      }catch(e){
+        console.log(e);
+        res.status(500).send('Error en recibir')
+      };
+    }else{
+      try{
+        const product = await this.productService.getProduct();
+        res.status(200).json(product);
+      }catch(e){
+        console.log(e);
+        res.status(500).send('Error en recibir')
+      };
+    };
   };
 
   //post de productos
@@ -33,22 +50,23 @@ class ProductController{
       }catch(e){
         console.log(e);
         res.status(500).send('Error en la creación');
-      }
+      };
     }else{
       res.status(400).send('Falta información');
-    }
+    };
   };
 
   //mostrar producto según el id
   async getProductId(req, res){
     const { id } = req.params; 
-    const product = await this.productService.getProductId(id);
+    
     try{
+      const product = await this.productService.getProductId(id);
       res.status(200).json(product);
     }catch(e){
       console.log(e);
       res.status(500).send('Error en recibir')
-    }
+    };
   };
 
   //modificación de producto según el id
@@ -71,21 +89,21 @@ class ProductController{
       }catch(e){
         console.log(e);
         res.status(500).send('Error en la modificación');
-      }
+      };
     }else{
       res.status(400).send('Falta información');
-    }
+    };
   };
 
   //filtrar producto si tiene envío gratis
   async getProductFilter(req, res){
-    const product = await this.productService.filterProduct();
     try{
+      const product = await this.productService.filterProduct();
       res.status(200).json(product);
     }catch(e){
       console.log(e);
       res.status(500).send('Error en recibir')
-    }
+    };
   };
 
   //agregar la propiedas discount: 0 a los que no tienen
@@ -107,11 +125,11 @@ class ProductController{
         res.status(200).send('Se agregó discount con éxito');
       }catch(e){
         res.status(500).send('Error al agregar');
-      }
+      };
     }else{
       res.status(400).send('Falta información');
-    }
-  }
-}
+    };
+  };
+};
 
 module.exports = ProductController;

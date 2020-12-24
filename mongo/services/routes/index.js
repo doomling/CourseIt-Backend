@@ -4,9 +4,12 @@ const ProductController = require('./../controllers/productController');
 const ProductService = require('./../services/productService');
 const UserController = require('./../controllers/userController');
 const UserService = require('./../services/userService');
+const SaleController = require('./../controllers/saleController');
+const SaleService = require('../services/saleService');
 
 const ProductInstance = new ProductController(new ProductService());
 const UserInstance = new UserController(new UserService());
+const SaleInstance = new SaleController(new SaleService());
 
 //Queremos crear una API para el manejo de productos: [GET] /products - [GET] /products/:id - [POST] /products - [PUT] /products/:id
 //Queremos crear un nuevo modelo de datos (en el mismo proyecto) pero para usuarios: [GET] /users - [GET] /users/:id - [GET] /users/:handler - [POST] /users
@@ -69,22 +72,22 @@ router.post('/users', function(req, res, next) {
 
 //get /sales
 router.get('/sales', function(req, res, next) {
-
+  SaleInstance.getSale(req, res);
 });
 
 //get /sales/:id
 router.get('/sales/:id', function(req, res, next) {
-
+  SaleInstance.getSaleId(req, res);
 });
 
 //get /sales/:user
 router.get('/sales/user/:user', function(req, res, next) {
-
+  SaleInstance.getSaleUser(req, res);
 });
 
 //post sales
-router.get('/sales', function(req, res, next) {
-
+router.post('/sales', function(req, res, next) {
+  SaleInstance.postSale(req, res);
 });
 
 module.exports = router;

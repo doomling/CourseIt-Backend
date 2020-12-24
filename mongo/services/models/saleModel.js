@@ -5,7 +5,27 @@ const saleSchema = mongoose.Schema(
   {
     product: {
       type: Object,
-      required: true
+      required: true,
+      price: {
+        type: Number,
+        required: true
+      },
+      name: {
+        type: String,
+        required: true
+      },
+      category: {
+        type: String
+      },
+      description: {
+        type: String
+      },
+      freeshipping: {
+        type: Boolean
+      },
+      stock: {
+        type: Number
+      }
     },
     user: {
       type: String,

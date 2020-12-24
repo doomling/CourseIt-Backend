@@ -3,9 +3,9 @@ const Product = require('./../models/productModel');
 class ProductService {
 
   //get de los productos
-  getProduct(){
-    const query = Product.find();
-    return query;
+  getProduct(page, limit){
+      const pages = Product.find().skip(page).limit(limit).exec();
+      return pages;
   };
 
   //agregar productos
