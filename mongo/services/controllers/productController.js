@@ -39,6 +39,18 @@ class ProductController{
     }
   };
 
+  //mostrar producto según el id
+  async getProductId(req, res){
+    const { id } = req.params; 
+    const product = await this.productService.getProductId(id);
+    try{
+      res.status(200).json(product);
+    }catch(e){
+      console.log(e);
+      res.status(500).send('Error en recibir')
+    }
+  };
+
   //modificación de producto según el id
   async putProduct(req, res){
     const { name, price, description, category, stock, freeshipping } = req.body;

@@ -14,6 +14,12 @@ class ProductService {
     return newProduct.save();
   };
 
+  //mostrar producto por id
+  getProductId(id){
+    const query = Product.findOne({_id: id}).exec();
+    return query;
+  }
+
   //modificar productos según el id
   modifyProduct(id, product){
     const productModify = Product.findOneAndUpdate({_id: id}, product).exec();
