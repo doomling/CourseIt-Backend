@@ -78,16 +78,11 @@ class SaleController{
     };
   };
 
-  //get productos ordenados por mas vendidos
-  async getTopProducts(req, res){
-   const sale = await this.saleService.getTopProducts();
-   res.json(sale);
-  };
-
-  async getTopUsers(req, res){
-    const sale = await this.saleService.getTopUser();
+  //get de productos y user ordenandos por mas vendidos
+  async getTop(req, res){
+    const sale = await this.saleService.getTop();
     res.json(sale);
-  }
+  };
 
 }
 

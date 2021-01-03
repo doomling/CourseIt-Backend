@@ -27,16 +27,9 @@ class SaleService{
     return query;
   };
   
-  //get de productos en orden mas vendido
-  getTopProducts(){
-    const query = Sale.aggregate([{$group: {_id: {product: '$product.name'},count: { $sum: 1 }} }]);
-    const order = query.sort({ count: -1})
-    return order;
-  }
-
-  //get de users ordenados por mas ventas hechas
-  getTopUser(){
-    const query = Sale.aggregate([{$group: {_id: {user: '$user'},count: { $sum: 1 }} }]);
+  //get de products y users ordenandos por mas vendidos
+  getTop(){
+    const query = Sale.aggregate([{$group: {_id: {product: '$product.name', user: '$user'},count: { $sum: 1 }} }]);
     const order = query.sort({ count: -1})
     return order;
   }

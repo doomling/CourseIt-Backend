@@ -83,14 +83,9 @@ router.get('/sales', function(req, res, next) {
   SaleInstance.getSale(req, res);
 });
 
-//get /sales/top/products
-router.get('/sales/top/products', function (req, res, next) {
-  SaleInstance.getTopProducts(req, res);
-});
-
-//get /sales/top/users
-router.get('/sales/top/users', function (req, res, next) {
-  SaleInstance.getTopUsers(req, res);
+//get /sales/top
+router.get('/sales/top', function(req, res, next) {
+  SaleInstance.getTop(req, res);
 });
 
 //get /sales/:id
