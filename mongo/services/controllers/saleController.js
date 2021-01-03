@@ -16,7 +16,7 @@ class SaleController{
         res.status(200).json(sale);
       }catch(e){
         console.log(e);
-        res.status(500).send('Error en recibir')
+        res.status(500).send('Error in receiving')
       };
     }else{
       try{
@@ -24,30 +24,31 @@ class SaleController{
         res.status(200).json(sale);
       }catch(e){
         console.log(e);
-        res.status(500).send('Error en recibir')
+        res.status(500).send('Error in receiving')
       };
     }
   };
 
   //post de sales
   async postSale(req, res){
-    const { product, user, date } = req.body;
+    const { product, user, date, sales } = req.body;
     const sale = {
       product: product,
       user: user,
-      date: date
+      date: date,
+      sales: sales
     };
 
     if(sale){
       try{
         await this.saleService.addSale(sale);
-        res.status(200).send('Se agregó el sale con éxito');
+        res.status(200).send('Sale added successfully');
       }catch(e){
         console.log(e);
-        res.status(500).send('Error en la creación');
+        res.status(500).send('Creation error');
       };
     }else{
-      res.status(400).send('Falta información');
+      res.status(400).send('Information is missing');
     };
   };
 
@@ -60,7 +61,7 @@ class SaleController{
         res.status(200).json(sale);
       }catch(e){
         console.log(e);
-        res.status(500).send('Error en recibir')
+        res.status(500).send('Error receiving')
       };
   };
 
@@ -73,9 +74,21 @@ class SaleController{
       res.status(200).json(sale);
     }catch(e){
       console.log(e);
-      res.status(500).send('Error en recibir')
+      res.status(500).send('Error receiving')
     };
   };
+
+  //get productos ordenados por mas vendidos
+  async getTopProducts(req, res){
+   const sale = await this.saleService.getTopProducts();
+   res.json(sale);
+  };
+
+  async getTopUsers(req, res){
+    const sale = await this.saleService.getTopUser();
+    res.json(sale);
+  }
+
 }
 
 module.exports = SaleController;

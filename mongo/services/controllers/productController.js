@@ -18,7 +18,7 @@ class ProductController{
         res.status(200).json(product);
       }catch(e){
         console.log(e);
-        res.status(500).send('Error en recibir')
+        res.status(500).send('Error receiving')
       };
     }else{
       try{
@@ -26,7 +26,7 @@ class ProductController{
         res.status(200).json(product);
       }catch(e){
         console.log(e);
-        res.status(500).send('Error en recibir')
+        res.status(500).send('Error receiving')
       };
     };
   };
@@ -46,13 +46,13 @@ class ProductController{
     if(product){
       try{
         await this.productService.addProduct(product);
-        res.status(200).send('Se agrego el producto con éxito');
+        res.status(200).send('The product was added successfully');
       }catch(e){
         console.log(e);
-        res.status(500).send('Error en la creación');
+        res.status(500).send('Creation failed');
       };
     }else{
-      res.status(400).send('Falta información');
+      res.status(400).send('Information is missing');
     };
   };
 
@@ -65,7 +65,7 @@ class ProductController{
       res.status(200).json(product);
     }catch(e){
       console.log(e);
-      res.status(500).send('Error en recibir')
+      res.status(500).send('Error receiving')
     };
   };
 
@@ -85,13 +85,13 @@ class ProductController{
     if(id && product){
       try{
         await this.productService.modifyProduct(id, product);
-        res.status(200).send(`Se modificó con éxito el id ${id} por el producto ${name}`);
+        res.status(200).send('It was successfully modified');
       }catch(e){
         console.log(e);
-        res.status(500).send('Error en la modificación');
+        res.status(500).send('Modification error');
       };
     }else{
-      res.status(400).send('Falta información');
+      res.status(400).send('Information is missing');
     };
   };
 
@@ -102,7 +102,7 @@ class ProductController{
       res.status(200).json(product);
     }catch(e){
       console.log(e);
-      res.status(500).send('Error en recibir')
+      res.status(500).send('Error receiving')
     };
   };
 
@@ -122,13 +122,26 @@ class ProductController{
     if(product && !discount){
       try{
         await this.productService.addProperty(product);
-        res.status(200).send('Se agregó discount con éxito');
+        res.status(200).send('Discount added successfully');
       }catch(e){
-        res.status(500).send('Error al agregar');
+        res.status(500).send('Add error');
       };
     }else{
-      res.status(400).send('Falta información');
+      res.status(400).send('Information is missing');
     };
+  };
+
+  async getProductByCategory(req, res){
+    const { productId } = req.params;
+    const product = await this.productService.getProductId(productId);
+    const productCategory = await this.productService.getProductByCategory(product.category);
+
+    const productRelated = {
+      name: product.name,
+      category: product.category,
+      related: productCategory
+    };
+    res.json(productRelated);
   };
 };
 

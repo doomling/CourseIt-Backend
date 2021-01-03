@@ -25,6 +25,7 @@ class UserService{
     const query = User.findOne({user: handler}).exec();
     return query;
   };
+
 }
 
 module.exports = UserService;

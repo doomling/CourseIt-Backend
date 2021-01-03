@@ -10,30 +10,31 @@ class UserController{
       res.status(200).json(user);
     }catch(e){
       console.log(e);
-      res.status(500).send('Error en recibir');
+      res.status(500).send('Error receiving');
     };
   };
 
   //post de users
   async postUser(req, res){
-    const { name, user, password, age } = req.body;
+    const { name, user, password, age, isAdmin } = req.body;
     const userData = {
       name: name,
       user: user,
       password: password,
-      age: age
+      age: age,
+      isAdmin: isAdmin
     };
 
-    if(userData){
+    if(userData && isAdmin == true){
       try{
         await this.userService.addUser(userData);
-        res.status(200).send('Se agrego al usuario con éxito');
+        res.status(200).send('User added successfully');
       }catch(e){
         console.log(e);
-        res.status(500).send('Error en la creación');
+        res.status(500).send('Creation error');
       };
     }else{
-      res.status(400).send('Falta información');
+      res.status(400).send('Information is missing');
     };
   };
 
@@ -46,7 +47,7 @@ class UserController{
       res.status(200).json(user);
     }catch(e){
       console.log(e);
-      res.status(500).send('Error en recibir');
+      res.status(500).send('Error receiving');
     };
   };
 
@@ -59,7 +60,7 @@ class UserController{
       res.status(200).json(user);
     }catch(e){
       console.log(e);
-      res.status(500).send('Error en recibir');
+      res.status(500).send('Error receiving');
     };
   };
 }

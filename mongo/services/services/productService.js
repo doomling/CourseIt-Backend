@@ -37,6 +37,12 @@ class ProductService {
     const query = Product.updateMany({}, product);
     return query;
   };
+
+  //filtrar productos por categoria
+  getProductByCategory(category){
+    const query = Product.find({category: category}).exec();
+    return query;
+  }
 }
 
 module.exports = ProductService;

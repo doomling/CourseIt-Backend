@@ -33,7 +33,6 @@ const saleSchema = mongoose.Schema(
     },
     date: {
       type: Date,
-      required: true
     }
   }
 )

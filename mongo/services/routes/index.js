@@ -14,6 +14,9 @@ const SaleInstance = new SaleController(new SaleService());
 //Queremos crear una API para el manejo de productos: [GET] /products - [GET] /products/:id - [POST] /products - [PUT] /products/:id
 //Queremos crear un nuevo modelo de datos (en el mismo proyecto) pero para usuarios: [GET] /users - [GET] /users/:id - [GET] /users/:handler - [POST] /users
 //Queremos crear un nuevo modelo de datos (en el mismo proyecto) para manejar las ventas de productos: [GET] /sales - [GET] /sales/:id - [GET] /sales/:user - [POST] /sales
+//Queremos crear un nuevo endpoint que nos devuelva productos relacionados para un producto en particular. Para calcular los relacionados vamos a usar la categoria del producto: [GET] /:productId/relacionados
+//Queremos crear un endpoint [GET] /sales/top que nos devuelva los productos ordenados por cantidad de ventas 
+//Queremos crear un endpoint [GET] /sales/top que nos devuelva los usuarios que mas ventas realizaron
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -50,6 +53,11 @@ router.put('/products/:id', function(req, res, next){
   ProductInstance.putProduct(req, res);
 });
 
+//get /:productId/relacionados
+router.get('/:productId/relacionados', function(req, res, next) {
+  ProductInstance.getProductByCategory(req, res);
+})
+
 //get /users
 router.get('/users', function(req, res, next) {
   UserInstance.getUser(req, res);
@@ -73,6 +81,16 @@ router.post('/users', function(req, res, next) {
 //get /sales
 router.get('/sales', function(req, res, next) {
   SaleInstance.getSale(req, res);
+});
+
+//get /sales/top/products
+router.get('/sales/top/products', function (req, res, next) {
+  SaleInstance.getTopProducts(req, res);
+});
+
+//get /sales/top/users
+router.get('/sales/top/users', function (req, res, next) {
+  SaleInstance.getTopUsers(req, res);
 });
 
 //get /sales/:id
