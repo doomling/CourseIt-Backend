@@ -39,6 +39,9 @@ class SaleController{
       sales: sales
     };
 
+    // el problema con validar usando 'sale' acâ es que siempre va a existir porque la creas arriba, te conviene hacer un check
+    // antes de crear sale con los campos requeridos si o si, por ejemplo (if req.product && req.ser)
+    
     if(sale){
       try{
         await this.saleService.addSale(sale);
@@ -71,6 +74,8 @@ class SaleController{
     
     try{
       const sale = await this.saleService.getSaleUser(user);
+      
+      // acá si te molesta devolver todo el objeto podés modelarlo previo a hacer el .json(), pero así está bien
       res.status(200).json(sale);
     }catch(e){
       console.log(e);
@@ -81,6 +86,7 @@ class SaleController{
   //get de productos y user ordenandos por mas vendidos
   async getTop(req, res){
     const sale = await this.saleService.getTop();
+    // acá si te molesta devolver todo el objeto podés modelarlo previo a hacer el .json(), pero así está bien
     res.json(sale);
   };
 
