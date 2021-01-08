@@ -25,6 +25,9 @@ class UserController{
       isAdmin: isAdmin
     };
 
+    // mismo problemas que con el controller de sales, te conviene el condicional hacerlo directamente con algo que venga en la req 
+    // if (req.body && req.body.name)
+    
     if(userData && isAdmin == true){
       try{
         await this.userService.addUser(userData);
